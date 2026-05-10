@@ -1,7 +1,3 @@
-// Create a function that represents a Computer (AI) Player to return a value that can or literally represent Rock, Paper and Scissors.
-// Get random choice from computer
-// Return random choice of computer as it's move (R/P/S)
-
 let humanScore = 0;
 let computerScore = 0;
 let youWinText = `You Win! Your Score: ${humanScore}, Computer Score: ${computerScore}`
@@ -46,7 +42,6 @@ function getHumanChoice(){
     return getMove(humanInput)
 }
 
-//FIX PLAY GAME!!!! STILL LOOPS AFTER WINNER IS ALREADY AT 5
 function playGame(){
     while(humanScore !== 5 && computerScore !==5){
             playRound()
