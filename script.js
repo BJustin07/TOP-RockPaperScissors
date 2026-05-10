@@ -48,7 +48,7 @@ function getHumanChoice(){
 
 //FIX PLAY GAME!!!! STILL LOOPS AFTER WINNER IS ALREADY AT 5
 function playGame(){
-    while(noWinner){
+    while(humanScore !== 5 && computerScore !==5){
             playRound()
             console.log("Moving on to the next round!")
     }
