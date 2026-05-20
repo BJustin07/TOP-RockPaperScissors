@@ -4,8 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=>, initial-scale=1.0">
     <title>Document</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <link rel ="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="game-box">
+        <div class="game">
+            <div class="game-details">
+                <h2 id="player-score">Your Score:</h2>
+                <h1 id="player-move">Player Move</h1>
+            </div>
+            <h2 id="game-result">Result</h2>
+            <div class="game-details">
+                <h2 id="computer-score">Computer Score: </h2>
+                <h1 id = "computer-move">Computer Move</h1>
+            </div>
+        </div>
+        <div class="playing-buttons">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+        <div class="start">
+            <button id="start-button">Start Game!</button>
+        </div>
+    </div>
 </body>
 </html>

@@ -29,19 +29,6 @@ function getMove(moveNumber){
     return move
 }
 
-function getHumanChoice(){
-    let humanInput = parseInt(prompt("What's your move? 0: Rock, 1: Paper, 2: Scissors"))
-    while(isNaN(humanInput) || parseInt(humanInput) > 3 || humanInput === undefined || humanInput === null){
-        if(isNaN(humanInput)){
-            humanInput = prompt("Thats an invalid move! Input a number!!! 0: Rock, 1: Paper, 2: Scissors")
-        }else{
-            humanInput = prompt("Thats an invalid move! Try Again, 0: Rock, 1: Paper, 2: Scissors")
-        }
-    }
-    console.log("Human Chose: ", getMove(humanInput))
-    return getMove(humanInput)
-}
-
 function playGame(){
     while(humanScore !== 5 && computerScore !==5){
             playRound()
@@ -55,16 +42,16 @@ function playGame(){
    
 }
 
-function playRound(){
-    const humanMove = getHumanChoice();
+function playRound(humanMove){
     const computerMove = getComputerChoice();
     let result = determineWinner(humanMove, computerMove)
     console.log(result)
+    return [computerMove, result];
 }
 
 function determineWinner(humanMove, computerMove){
     if(humanMove === computerMove){
-        return (drawText + `  Your Score: ${humanScore}, Computer Score: ${computerScore} `)
+        return (drawText)
     }
     let result = ""
     switch (humanMove){
@@ -100,11 +87,70 @@ function determineWinner(humanMove, computerMove){
 
 function getScore(humanScore, computerScore, gameResult){
     if(gameResult === true){
-        return `You Win! Your Score: ${humanScore}, Computer Score: ${computerScore}`    
+        return `You Win!`    
     }
-    return `You Lose! Your Score: ${humanScore}, Computer Score: ${computerScore}`    
+    return `You Lose!`    
     
 }
 
-let gameResult = playGame();
-console.log(gameResult)
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+rockBtn.disabled = true;
+paperBtn.disabled =true;
+scissorsBtn.disabled = true;
+
+const playerMoveText = document.querySelector("#player-move");
+const computerMoveText = document.querySelector("#computer-move");
+const playerCurrentScore = document.querySelector("#player-score");
+const computerCurrentScore = document.querySelector("#computer-score");
+const gameResultText = document.querySelector("#game-result");
+
+const startButton = document.querySelector("#start-button");
+startButton.addEventListener("click", (e)=>{
+    rockBtn.disabled = false;
+    paperBtn.disabled =false;
+    scissorsBtn.disabled = false;
+    startButton.textContent = "Restart Game";
+    const playerScores = humanScore > 0 || computerScore > 0;
+    if(e.target.textContent === "Restart Game" && playerScores){
+        humanScore = 0;
+        computerScore = 0;
+        gameResultText.textContent = "";
+        rockBtn.disabled = false;
+        paperBtn.disabled =false;
+        scissorsBtn.disabled = false;
+        updateScores();
+    }
+})
+
+
+function updateScores(){
+    playerCurrentScore.textContent = `Your Score: ${humanScore}`;
+    computerCurrentScore.textContent = `Computer Score: ${computerScore}`;
+}
+
+const playingButtons = document.querySelector(".playing-buttons");
+playingButtons.addEventListener("click",event =>{
+    if(event.target.tagName !== "BUTTON") return;
+    const playerMove = event.target.textContent;
+    const [computerMove,gameResult] = playRound(playerMove);
+    playerMoveText.textContent = playerMove;
+    computerMoveText.textContent = computerMove;
+    gameResultText.textContent = gameResult;
+    updateScores();
+    if(humanScore >= 5){
+        gameResultText.textContent = "Wow you won against the Computer, nice!";
+        rockBtn.disabled = true;
+        paperBtn.disabled =true;
+        scissorsBtn.disabled = true;
+    }else if(computerScore >= 5){
+        gameResultText.textContent = "Wow you lost against the Computer, dumFok!";
+        rockBtn.disabled = true;
+        paperBtn.disabled =true;
+        scissorsBtn.disabled = true;
+    }
+})
+
+// let gameResult = playGame();
+// console.log(gameResult)

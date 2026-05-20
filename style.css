@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.game-box{
+    display:flex;
+    flex-direction: column;
+    /* justify-content: space-between;
+    align-content: space-between; */
+    gap: 24px;
+}
+
+.game{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    width: 100vh;
+}
+
+.playing-buttons{
+    display:flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+.start{
+    display:flex;
+    justify-content: center;
+}
